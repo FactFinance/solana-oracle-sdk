@@ -1,0 +1,19 @@
+{
+  "name": "fact-sdk",
+  "version": "0.1.0",
+  "description": "SDK to interact with Fact Finance oracle.",
+  "main": "index.js",
+  "dependencies": {
+    "@coral-xyz/anchor": "^0.28.0",
+    "mz": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/bn.js": "^5.1.0",
+    "typescript": "^4.3.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
