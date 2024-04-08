@@ -52,3 +52,4 @@ Then, install the dependencies:
 
 ## License
 
+MIT
