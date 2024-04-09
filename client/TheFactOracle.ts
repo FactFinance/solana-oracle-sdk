@@ -3,7 +3,7 @@ import { Oracle } from "./rust-files/oracle";
 import OracleIDL from "./rust-files/oracle.json"
 import * as anchor from "@coral-xyz/anchor";
 import * as web3 from "@solana/web3.js";
-import { MAINNET_FACT_PROGRAM_ID, DEVNET_FACT_PROGRAM_ID, FACT_PDA_ADMIN } from "./const";
+import * as fact from "./const";
 
 /**
  * 
@@ -29,17 +29,19 @@ export class TheFactOracle {
     walletUser: web3.Keypair;
     walletSystem: web3.Keypair;
 
-    constructor(provider: anchor.Provider, environment?: "devnet" | "mainnet") {
-        this.programId = new web3.PublicKey(DEVNET_FACT_PROGRAM_ID);
-        if (environment == "mainnet") {
-            this.programId = new web3.PublicKey(MAINNET_FACT_PROGRAM_ID);
+    constructor(provider: anchor.Provider, environment?: "devnet" | "testnet" | "mainnet") {
+        this.programId = new web3.PublicKey(fact.DEVNET_FACT_PROGRAM_ID);
+        if (environment == "testnet") {
+            this.programId = new web3.PublicKey(fact.TESTNET_FACT_PROGRAM_ID);
+        } else if (environment == "mainnet") {
+            throw new Error("Mainnet not supported yet!");
         }
         
         this.provider = provider;
         this.program = new anchor.Program(OracleIDL as any, this.programId, this.provider);
         
         // adminAddress é o endereço que o programa usa para criar o PDA.
-        this.adminAddress = new web3.PublicKey(FACT_PDA_ADMIN);
+        this.adminAddress = new web3.PublicKey(fact.FACT_PDA_ADMIN);
         this.walletUser = web3.Keypair.generate();
         
     }
@@ -80,7 +82,7 @@ export class TheFactOracle {
             console.log("TX META returned =>", returned);
 
         } catch (e) {
-            console.log("Datafeed not found (getValue)!", e["logs"]);
+            console.log("Datafeed not found (getValue)!", e);
         }
 
     }

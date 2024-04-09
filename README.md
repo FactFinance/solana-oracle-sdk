@@ -20,7 +20,7 @@ Then, install the dependencies:
 ```typescript
   import { TheFactOracle } from 'TheFactOracle';
 
-  const theFactOracle = new TheFactOracle(provider, "devnet");
+  const theFactOracle = new TheFactOracle(provider, "testnet");
   let [value, timestamp] = await theFactOracle.getValueAccount(datafeedAccount);
 ```
 
@@ -32,18 +32,18 @@ Then, install the dependencies:
   const wallet = await getKey();
   const anchorWallet = new anchor.Wallet(wallet);
 
-  let connection = new web3.Connection("https://api.devnet.solana.com", "confirmed");
+  let connection = new web3.Connection("https://api.testnet.solana.com", "confirmed");
   const provider = new anchor.AnchorProvider(connection, anchorWallet, {})
   anchor.setProvider(provider);
 
-  const theFactOracle = new TheFactOracle(provider, "devnet");
+  const theFactOracle = new TheFactOracle(provider, "testnet");
   const pdaAdmin = new web3.PublicKey(FACT_PDA_ADMIN);
-  const devnetProgram = new web3.PublicKey(DEVNET_FACT_PROGRAM_ID);
+  const testnetProgram = new web3.PublicKey(TESTNET_FACT_PROGRAM_ID);
   const feedId = 150;
 
   let [datafeedAccount, _] = await anchor.web3.PublicKey.findProgramAddress(
     [pdaAdmin.toBuffer(), Buffer.from("_"), Buffer.from(feedId.toString())], 
-    devnetProgram
+    testnetProgram
   );
 
   let [value, timestamp] = await theFactOracle.getValueAccount(datafeedAccount);
