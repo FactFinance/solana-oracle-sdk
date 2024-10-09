@@ -120,7 +120,7 @@ export class TheFactOracle {
         const timestamp = Math.floor(Date.now() / 1000);
         
         let instructionSetValue = await this.program.methods
-        .setValue(new_value, timestamp)
+        .setValue(new_value, timestamp, 1)
         .accounts({
             datafeed: datafeedAccount,
             signer: this.walletSystem.publicKey,
@@ -150,6 +150,7 @@ const oracleFeedReturnSchema = new Map([
         fields: [
             ["value", "u32"],
             ["timestamp", "u32"],
+            ["confidence", "u8"],
         ],
         },
     ],
