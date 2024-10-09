@@ -46,7 +46,7 @@ Then, install the dependencies:
     testnetProgram
   );
 
-  let [value, timestamp] = await theFactOracle.getValueAccount(datafeedAccount);
+  let [value, timestamp, confidenceIndex] = await theFactOracle.getValueAccount(datafeedAccount);
 
 ```
 

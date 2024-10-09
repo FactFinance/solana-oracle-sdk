@@ -44,7 +44,7 @@ export type Oracle = {
       ],
       "args": [],
       "returns": {
-        "defined": "(u32,u32)"
+        "defined": "(u32,u32,u8)"
       }
     },
     {
@@ -151,15 +151,14 @@ export type Oracle = {
             "type": "u8"
           },
           {
-            "name": "owner",
-            "type": "publicKey"
+            "name": "timestamp",
+            "type": "u32"
           },
           {
-            "name": "subscribers",
-            "type": {
-              "vec": "publicKey"
-            }
+            "name": "confidence",
+            "type": "u8"
           }
+
         ]
       }
     }
@@ -224,7 +223,7 @@ export const IDL: Oracle = {
       ],
       "args": [],
       "returns": {
-        "defined": "(u32,u32)"
+        "defined": "(u32,u32,u8)"
       }
     },
     {
@@ -331,14 +330,12 @@ export const IDL: Oracle = {
             "type": "u8"
           },
           {
-            "name": "owner",
-            "type": "publicKey"
+            "name": "timestamp",
+            "type": "u32"
           },
           {
-            "name": "subscribers",
-            "type": {
-              "vec": "publicKey"
-            }
+            "name": "confidence",
+            "type": "u8"
           }
         ]
       }
